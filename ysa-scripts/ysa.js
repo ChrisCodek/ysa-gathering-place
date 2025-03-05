@@ -94,15 +94,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // Google Sheet
-fetch("https://script.google.com/macros/s/AKfycbyxvnlkpUMjBpZ5JYMxKiaUAcS5zrY6gYPQMydvMKIwf3RhV1bmk1-cVp5jk0XbDQBA/exec", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(object) // ✅ Send JSON correctly
-})
-.then(response => response.text())
-.then(data => {
-    console.log("Response from Google Script:", data); // Debugging
-    document.getElementById("responseMessage").classList.remove("hidden");
-    document.getElementById("registrationForm").reset();
-})
-.catch(error => console.error("Fetch Error:", error));
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("registrationForm");
+    const responseMessage = document.getElementById("responseMessage");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Collect form data
+        let formData = new FormData(form);
+        let object = {};
+        formData.forEach((value, key) => object[key] = value);
+
+        // Handling radio button for membership
+        object["membership"] = document.querySelector('input[name="membership"]:checked')?.value || "";
+
+        // If "No" is selected for membership, clear ward value
+        if (object["membership"] !== "Yes") {
+            object["ward"] = "";
+        }
+
+        // Send data to Google Apps Script
+        fetch("https://script.google.com/macros/s/AKfycbyxvnlkpUMjBpZ5JYMxKiaUAcS5zrY6gYPQMydvMKIwf3RhV1bmk1-cVp5jk0XbDQBA/exec", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(object) // ✅ Corrected: Now sending actual form data
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log("Response from Google Script:", data); // Debugging
+            responseMessage.classList.remove("hidden"); // Show success message
+            form.reset(); // Reset form after submission
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                responseMessage.classList.add("hidden");
+            }, 5000);
+        })
+        .catch(error => console.error("Fetch Error:", error));
+    });
+});
+
