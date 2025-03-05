@@ -92,38 +92,17 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// Spread Sheet Information
-document.getElementById("registrationForm").addEventListener("submit", function(e) {
-    e.preventDefault();
 
-    var formData = new FormData(this);
-    var object = {};
-    formData.forEach((value, key) => object[key] = value);
-    
-    // Handling radio button value
-    object["membership"] = document.querySelector('input[name="membership"]:checked')?.value || "";
-    
-    // Ward should only be included if the user selects "Yes"
-    if (object["membership"] !== "Yes") {
-      object["ward"] = "";
-    }
-
-    var json = JSON.stringify(object);
-
-    fetch("https://script.google.com/macros/s/AKfycbw2_Nu9-4xFeDH8B4XMAffXGwIt3FLCISCkarknjRakRxcOpxwt3ONlPUgA7rkt0Nlz/exec", {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: json
-    }).then(() => {
-      document.getElementById("responseMessage").classList.remove("hidden");
-      document.getElementById("registrationForm").reset();
-    }).catch(error => console.error("Error:", error));
-  });
-
-  // Show ward section only if user selects "Yes"
-  document.querySelectorAll('input[name="membership"]').forEach(radio => {
-    radio.addEventListener("change", function() {
-      document.getElementById("wardSection").classList.toggle("hidden", this.value !== "Yes");
-    });
-  });
+// Google Sheet
+fetch("https://script.google.com/macros/s/AKfycbyxvnlkpUMjBpZ5JYMxKiaUAcS5zrY6gYPQMydvMKIwf3RhV1bmk1-cVp5jk0XbDQBA/exec", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(object) // ✅ Send JSON correctly
+})
+.then(response => response.text())
+.then(data => {
+    console.log("Response from Google Script:", data); // Debugging
+    document.getElementById("responseMessage").classList.remove("hidden");
+    document.getElementById("registrationForm").reset();
+})
+.catch(error => console.error("Fetch Error:", error));
