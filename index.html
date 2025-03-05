@@ -1,0 +1,167 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YSAs Skill Acquisition</title>
+    <link rel="stylesheet" href="ysa-styles/styles.css">
+</head>
+<body>
+    <nav>
+        <a href="#home" onclick="showPage('home')">Home</a>
+        <a href="#register" onclick="showPage('register')">Register</a>
+        <a href="#programs" onclick="showPage('programs')">Programs</a>
+        <a href="#computer" onclick="showPage('computer')">Computer Classes</a>
+        <a href="#testimonial" onclick="showPage('testimonial')">Testimonial</a>
+        <a href="#contact" onclick="showPage('contact')">Contact</a>
+    </nav>
+
+    <!-- Home Content -->
+    <div id="home" class="container">
+        <img src="ysa-images/hero-ysa.jpeg" alt="Hero Image" class="hero-img">
+        <div class="hero-content">
+            <h2>Welcome to YSAs Skill Acquisition Program</h2>
+            <p>This program helps Young Single Adults learn valuable skills like Computer Literacy, Fashion Design, Catering, and Barbering.</p>
+        </div>
+    </div>
+
+    <div id="register" class="container hidden">
+        <!-- Success Message -->
+        <p id="responseMessage" class="hidden">Registration Successful! 🎉</p>
+        
+        <h2>Register for a Program</h2>
+        <form id="registrationForm">
+            <!-- Full Name -->
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" required>
+    
+            <!-- Email --> 
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+    
+            <!-- Phone -->
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" required>
+    
+            <!-- Home Address -->
+            <label for="address">Home Address:</label>
+            <input type="text" id="address" required>
+    
+            <!-- Church Membership -->
+            <label>Are you a member of The Church of Jesus Christ of Latter-day Saints?</label>
+            <div class="radio-group">
+                <input type="radio" id="memberYes" name="membership" value="Yes" required>
+                <label for="memberYes">Yes</label>
+    
+                <input type="radio" id="memberNo" name="membership" value="No">
+                <label for="memberNo">No</label>
+            </div>
+    
+            <!-- Ward Selection (Hidden by Default) -->
+            <div id="wardSection" class="hidden">
+                <label for="ward">Which Ward are you from?</label>
+                <input type="text" id="ward">
+            </div>
+    
+            <!-- Skill Program Selection -->
+            <label for="skill">Select Skill Program:</label>
+            <select id="skill" required>
+                <option value="" disabled selected>Select a program</option>
+                <option>Computer Class</option>
+                <option>Female Fashion Design</option>
+                <option>Male Fashion Design</option>
+                <option>Catering</option>
+                <option>Barbering</option>
+            </select>
+    
+            <!-- Submit Button -->
+            <button type="submit">Register</button>
+        </form>
+    </div>
+    
+   
+    <div id="programs" class="container hidden">
+        <h2>Available Programs</h2>
+        <a href="#register" onclick="showPage('register')" class="RegBtn">Register for Program</a>
+        <div class="card-container">
+            <div class="card">
+                <img src="ysa-images/ysa-computer-class.jpg" alt="Computer Class">
+                <h3>Computer Class</h3>
+                <p>Learn essential computer skills.</p>
+            </div>
+            <div class="card">
+                <img src="ysa-images/ysa-female-fashion.avif" alt="Female Fashion Design">
+                <h3>Female Fashion Design</h3>
+                <p>Sewing, cutting, and styling.</p>
+            </div>
+            <div class="card">
+                <img src="ysa-images/ysa-male-fashion.jpg" alt="Male Fashion Design">
+                <h3>Male Fashion Design</h3>
+                <p>Tailoring for men’s fashion.</p>
+            </div>
+            <div class="card">
+                <img src="ysa-images/ysa-catering.jpg" alt="Catering">
+                <h3>Catering</h3>
+                <p>Cooking and baking techniques.</p>
+            </div>
+            <div class="card">
+                <img src="ysa-images/ysa-barbering.jpg" alt="Barbering">
+                <h3>Barbering</h3>
+                <p>Haircut and grooming skills.</p>
+            </div>
+        </div>
+    </div>
+   
+    <div id="computer" class="tech-container hidden">
+        <h2 class="comp-h2">💻 Computer Class Details</h2>
+        <p>Learn the following software and skills:</p>
+        <ul>
+            <li>📄 Microsoft Office (Word, Excel, PowerPoint)</li>
+            <li>🎨 Basic Graphic Design (Canva, Photoshop)</li>
+            <li>🌐 Web Development (HTML, CSS, JavaScript)</li>
+        </ul>
+        <button id="toggleDetails">Hide Details</button>
+    </div>
+
+    <!-- Testimonials -->
+    <div id="testimonial" class="container hidden">
+        <div class="testimonial active">
+            <img src="ysa-images/profile-pix.jpg" alt="Jane">
+            <p>"This program changed my life! I learned computer skills that helped me get a job."</p>
+            <h3>- Jane</h3>
+        </div>
+        <div class="testimonial">
+            <img src="ysa-images/profile-pix.jpg" alt="Michael">
+            <p>"I now have my own fashion business, thanks to this training!"</p>
+            <h3>- Michael</h3>
+        </div>
+        <div class="testimonial">
+            <img src="ysa-images/profile-pix.jpg" alt="Sarah">
+            <p>"The catering class gave me confidence to start my own food business!"</p>
+            <h3>- Sarah</h3>
+        </div>
+        <!-- Navigation Buttons -->
+        <div class="testimonial-nav">
+            <button onclick="prevTestimonial()">❮ Prev</button>
+            <button onclick="nextTestimonial()">Next ❯</button>
+        </div>
+    </div>
+   
+    <div id="contact" class="container hidden">
+        <h2>Contact Us</h2>
+        <p>Email: <a href="mailto:chriscodek333@gmail.com">chriscodek333@gmail.com</a></p>
+        <p>Phone: <a href="tel:+2348165016088">+234 816 501 6088</a></p>
+    
+        <!-- WhatsApp Button -->
+        <a href="https://wa.link/tygg58" target="_blank" class="whatsapp-btn">
+            Chat on WhatsApp
+        </a>
+    </div>
+    
+    
+   
+    <script src="ysa-scripts/ysa.js"></script>
+</body>
+</html>
+
